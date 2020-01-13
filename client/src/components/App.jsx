@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import { browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import NavigationBar from './modules/NavigationBar';
-import Footer from './modules/Footer';
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope, faPassport } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faEnvelope, faPassport);
 
 class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <NavigationBar />
-          <Route name="home" exact path="/" component={Home} />
-          <Footer />
-        </div>
-      </Router>
-    )
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Route name="home" exact path="/" component={Home} />
+                </div>
+            </Router>
+        )
+    }
 }
 
 export default App;
