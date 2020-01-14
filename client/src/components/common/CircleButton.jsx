@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class CircleButton extends Component {
     render() {
         return (
-            <a className="circularButton" href={this.props.link}>
+            <a className="circularButton" href={this.props.link} target="_blank">
                 <FontAwesomeIcon icon={this.props.icon} fixedWidth size="2x" className="icon" />
             </a>
         );

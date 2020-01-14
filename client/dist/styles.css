@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6, p, a {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
     .banner h1 {
@@ -116,6 +116,7 @@ h1, h2, h3, h4, h5, h6, p, a {
     flex-direction: row;
 }
 .circularButton {
+    color: #000000;
     text-align: center;
     border-radius: 100%;
     border: 1px solid #000000;
@@ -126,4 +127,10 @@ h1, h2, h3, h4, h5, h6, p, a {
     align-items: center;
     margin-left: 1em;
     margin-right: 1em;
+    transition: 0.2s;
 }
+
+    .circularButton:hover {
+        color: #ffffff;
+        background-color: #000000;;
+    }
