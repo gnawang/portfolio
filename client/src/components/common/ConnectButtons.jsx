@@ -8,7 +8,7 @@ class ConnectButtons extends Component {
                 <CircularButton icon={'envelope'} link={'mailto:gnawang@umich.edu'} />
                 <CircularButton icon={['fab', 'linkedin']} link={'https://www.linkedin.com/in/gnawang/'} />
                 <CircularButton icon={['fab', 'github']} link={'https://github.com/gnawang'} />
-                <CircularButton icon={['fas', 'passport']} link={'/static/files/AlexanderWang2018.pdf'} />
+                <CircularButton icon={['fas', 'passport']} link={'/static/files/alexander_wang_resume.pdf'} />
             </div>
         );
     }
