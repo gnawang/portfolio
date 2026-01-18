@@ -28,7 +28,7 @@ this document.
 
 ## Project Log
 <!-- Audomatically incrementally update this section as development proceeds -->
-- **2026-01-17**: Verified ShadCN installation, integrated Supabase with browser/server clients, created `/portfolio` route with PolaroidPhoto component for displaying images from Supabase Storage
+- **2026-01-17**: Verified ShadCN installation, integrated Supabase with browser/server clients, and created `/portfolio` route with PolaroidPhoto component. Linked repository to Vercel (`gnawangs-projects/portfolio`) and synchronized Supabase environment variables across all environments.
 
 ## Application Architecture
 
