@@ -4,7 +4,7 @@ protocols. You must prioritize these project-specific patterns, naming
 conventions, and technical constraints over general defaults. Internalize 
 this specification before initiating any tasks to ensure all contributions 
 remain consistent with the existing codebase and system integrity. The only 
-portion of this document that can be modified is the Project State portion
+portion of this document that can be modified is the Project Log portion
 marked with a comment: <!-- -->. Otherwise, do NOT modify any other part of
 this document.
 
@@ -26,38 +26,99 @@ this document.
 - **CI/CD**: Vercel GitHub integration (automatic deployments on push)
 - Environment variables managed via Vercel dashboard and local .env.local
 
-## Project State
+## Project Log
 <!-- Audomatically incrementally update this section as development proceeds -->
+- **2026-01-17**: Verified ShadCN installation, integrated Supabase with browser/server clients, created `/portfolio` route with PolaroidPhoto component for displaying images from Supabase Storage
 
 ## Application Architecture
 
 ### Directory Structure
 ```
 root/
-├── AGENTS.md/             # Project schema, AI instructions, and standards
-├── public/                # Static assets (favicons, robots.txt)
+├── AGENTS.md              # Project schema, AI instructions, and standards
+├── public/                # Static assets (favicons, robots.txt, images)
 ├── src/
+│   ├── app/               # Next.js App Router (file-system based routing)
+│   │   ├── layout.tsx     # Root layout (required) - must contain <html> and <body>
+│   │   ├── page.tsx       # Home page (/)
+│   │   ├── globals.css    # Global styles
+│   │   ├── [route-name]/  # Route segments
+│   │   │   ├── page.tsx   # Route UI
+│   │   │   ├── layout.tsx # Route-specific layout (optional)
+│   │   │   ├── loading.tsx# Loading UI (optional)
+│   │   │   ├── error.tsx  # Error boundary (optional, must be Client Component)
+│   │   │   └── not-found.tsx # 404 UI (optional)
+│   │   └── api/           # API route handlers
+│   │       └── [endpoint]/route.ts
 │   ├── components/        # Shared UI primitives (Button, Input, Card)
 │   ├── features/          # Domain-specific modules
 │   │   └── [feature-name]/
 │   │       ├── index.ts   # Barrel export for single point imports
-│   │       ├── api.ts     # Feature-specific data fetching (example name)
-│   │       ├── ui.tsx     # Domain-specific components (example name)
-│   │       ├── types.ts   # Local interfaces (example name)
-│   │       ├── style.css  # Local styles (example name)
-│   │       └── test.ts    # Colocated unit/integration tests (example name)
+│   │       ├── api.ts     # Feature-specific data fetching for this feature
+│   │       ├── [featureComponentName].tsx     # Domain-specific components (example name)
+│   │       ├── [featureComponentName].test.tsx    # Colocated unit/integration tests (example name)
+│   │       ├── types.ts   # Local interfaces for this feature
+│   │       └── style.css  # Local styles for this feature
 │   ├── lib/               # Shared logic and configuration
-│   │   ├── hooks/         # Shared stateful logic
+│   │   ├── hooks/         # Shared stateful logic (Client Components only)
 │   │   └── utils/         # Pure helper functions
-│   ├── routes/            # SPA entry points and URL mapping
-│   │   └── [route-name]/
-│   │       ├── page.tsx   # Orchestrates features for a specific view
-│   │       └── layout.tsx # Route-specific UI wrappers
-│   ├── types/             # Global/Shared TypeScript definitions
-│   ├── styles/            # Global themes and CSS variables
-│   └── main.tsx           # SPA bootstrap and Provider setup
+│   └── types/             # Global/Shared TypeScript definitions
 └── tests/                 # Global E2E and orchestration tests
 ```
+
+### Next.js App Router Conventions
+
+#### Reserved File Names
+| File | Purpose | Notes |
+|------|---------|-------|
+| `page.tsx` | Route UI | Required to make route accessible |
+| `layout.tsx` | Shared layout | Wraps page and child layouts |
+| `loading.tsx` | Loading state | Uses React Suspense |
+| `error.tsx` | Error boundary | **Must be Client Component** |
+| `not-found.tsx` | 404 UI | Segment-specific not found |
+| `route.ts` | API endpoint | Cannot coexist with page.tsx |
+| `template.tsx` | Re-mounting layout | Remounts on navigation |
+| `default.tsx` | Parallel route fallback | For @folder routes |
+| `middleware.ts` | Request middleware | Must be at project root |
+
+#### Route Segment Patterns
+| Pattern | Example | URL |
+|---------|---------|-----|
+| Static | `app/blog/page.tsx` | `/blog` |
+| Dynamic | `app/blog/[slug]/page.tsx` | `/blog/:slug` |
+| Catch-all | `app/docs/[...slug]/page.tsx` | `/docs/*` |
+| Optional catch-all | `app/docs/[[...slug]]/page.tsx` | `/docs` or `/docs/*` |
+| Route Groups | `app/(marketing)/page.tsx` | Groups without URL impact |
+| Private folders | `app/_components/` | Excluded from routing |
+| Parallel Routes | `app/@modal/page.tsx` | Simultaneous rendering |
+
+#### Component Types
+- **Server Components (Default)**: No directive needed. Cannot use:
+  - React hooks (`useState`, `useEffect`, `useContext`, etc.)
+  - Browser APIs (`window`, `document`, `localStorage`)
+  - Event handlers (`onClick`, `onChange`, etc.)
+  - Class components
+- **Client Components**: Add `'use client'` directive at file top. Required for:
+  - Interactivity and event listeners
+  - React hooks usage
+  - Browser-only APIs
+  - Third-party libraries needing browser context
+
+#### Data Fetching
+- Use `async/await` directly in Server Components
+- `fetch()` is extended with caching: `fetch(url, { cache: 'force-cache' | 'no-store' })`
+- Revalidation: `fetch(url, { next: { revalidate: 60 } })` or `export const revalidate = 60`
+- Server Actions: Functions marked with `'use server'` for mutations
+- `generateStaticParams()`: Pre-render dynamic routes at build time
+- `generateMetadata()`: Dynamic metadata per route
+
+#### Optimized Components
+| Component | Import | Usage |
+|-----------|--------|-------|
+| `Image` | `next/image` | Always use for images - auto-optimization, lazy loading |
+| `Link` | `next/link` | Client-side navigation, prefetching |
+| `Font` | `next/font/google` or `next/font/local` | Zero layout shift, self-hosted |
+| `Script` | `next/script` | Optimized third-party script loading |
 
 ## Development Standards
 
