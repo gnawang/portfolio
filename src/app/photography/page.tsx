@@ -16,7 +16,7 @@ interface Photo {
  * Portfolio page - displays all photos from Supabase Storage in a Polaroid grid.
  * Client Component that tracks loading state.
  */
-export default function PortfolioPage() {
+export default function PhotographyPage() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,11 +39,11 @@ export default function PortfolioPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-neutral-50 p-8 dark:bg-neutral-900">
+    <main className="min-h-screen bg-background p-12">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight">Portfolio</h1>
-          <p className="text-lg text-muted-foreground">
+        <header className="mb-16 text-center">
+          <h1 className="mb-4 text-5xl font-rodin text-foreground tracking-tight italic">Photography</h1>
+          <p className="text-xl font-seurat text-foreground/70">
             A collection of moments captured through my lens
           </p>
         </header>

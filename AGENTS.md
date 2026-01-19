@@ -28,7 +28,8 @@ this document.
 
 ## Project Log
 <!-- Audomatically incrementally update this section as development proceeds -->
-- **2026-01-17**: Verified ShadCN installation, integrated Supabase with browser/server clients, and created `/portfolio` route with PolaroidPhoto component. Linked repository to Vercel (`gnawangs-projects/portfolio`) and synchronized Supabase environment variables across all environments.
+- **2026-01-17**: Verified ShadCN installation, integrated Supabase with browser/server clients, and created `/photography` route with PolaroidPhoto component. Linked repository to Vercel (`gnawangs-projects/photography`) and synchronized Supabase environment variables across all environments.
+- **2026-01-18**: Redesigned the frontpage with a custom "window" UI, integrated local fonts (RodinBokutoh and Seurat), and implemented navigation to the `/photography` route. Updated the site-wide color palette with a custom earthy/green theme (background-primary, text-main, text-highlight, background-green) and applied it to the Home and Photography pages.
 
 ## Application Architecture
 
