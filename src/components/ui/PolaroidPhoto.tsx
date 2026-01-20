@@ -65,8 +65,7 @@ export function PolaroidPhoto({
       <div className="absolute bottom-0 left-0 right-0 h-10 flex items-center justify-center px-2">
         {caption && (
           <p
-            className="text-sm text-neutral-600 text-center truncate font-handwriting"
-            style={{ fontFamily: "'Caveat', cursive" }}
+            className="text-sm text-neutral-600 text-center truncate font-seurat"
           >
             {caption}
           </p>

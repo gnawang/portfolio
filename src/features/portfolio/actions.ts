@@ -1,12 +1,13 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
+import { Photo } from "@/types";
 
 /**
  * Fetches the list of photos from Supabase Storage using the secret key (service role).
  * This bypasses RLS restrictions for listing while keeping the credentials secure on the server.
  */
-export async function getPortfolioPhotos() {
+export async function getPortfolioPhotos(): Promise<Photo[]> {
   const BUCKET_NAME = "photos";
   
   const supabase = createClient(
