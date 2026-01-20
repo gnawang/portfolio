@@ -24,7 +24,7 @@ export default function Home() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-8 md:gap-12">
-          <NavButton href="#" icon={Info} label="about" disabled />
+          <NavButton href="/about" icon={Info} label="about" />
           <NavButton href="/projects" icon={LayoutGrid} label="projects" />
           <NavButton href="/photography" icon={ImageIcon} label="album" />
         </div>

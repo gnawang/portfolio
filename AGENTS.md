@@ -32,6 +32,7 @@ this document.
 - **2026-01-18**: Redesigned the frontpage with a custom "window" UI, integrated local fonts (RodinBokutoh and Seurat), and implemented navigation to the `/photography` route. Updated the site-wide color palette with a custom earthy/green theme (background-primary, text-main, text-highlight, background-green) and applied it to the Home and Photography pages.
 - **2026-01-19**: Created a new `/projects` route with a responsive grid-based layout. Implemented a reusable `ProjectCard` component featuring a trading card aesthetic. Established a static project data structure and updated the home page navigation to include the "projects" section.
 - **2026-01-19**: Implemented a centralized Animated Content Portal System using the independent `motion` library (formerly `framer-motion`) and React Context. Refactored the root layout and all routes (Home, Photography, Projects) to render within a shared, smoothly-transitioning "Window" container that responds to route-specific dimension configurations.
+- **2026-01-19**: Implemented the `/about` route featuring professional introduction, categorized skills (Technical, Design, Prototyping), and collaboration CTA. Integrated Framer Motion animations for staggered section reveals and updated the homepage navigation to enable the "about" link.
 
 ## Application Architecture
 
